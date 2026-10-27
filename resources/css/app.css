@@ -1,0 +1,225 @@
+@import 'tailwindcss';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Primary brand palette (indigo-violet) */
+    --color-brand-50: #eef2ff;
+    --color-brand-100: #e0e7ff;
+    --color-brand-200: #c7d2fe;
+    --color-brand-300: #a5b4fc;
+    --color-brand-400: #818cf8;
+    --color-brand-500: #6366f1;
+    --color-brand-600: #4f46e5;
+    --color-brand-700: #4338ca;
+    --color-brand-800: #3730a3;
+    --color-brand-900: #312e81;
+    --color-brand-950: #1e1b4b;
+
+    --shadow-card: 0 1px 2px rgb(15 23 42 / 0.05);
+    --shadow-card-hover: 0 12px 32px -12px rgb(15 23 42 / 0.18);
+    --shadow-pop: 0 10px 40px -8px rgb(15 23 42 / 0.22);
+
+    --radius-xl2: 1.125rem;
+
+    --animate-fade-up: fade-up 0.5s ease both;
+    --animate-fade-in: fade-in 0.35s ease both;
+    --animate-shimmer: shimmer 1.6s linear infinite;
+
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(14px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes shimmer {
+        from {
+            background-position: 200% 0;
+        }
+        to {
+            background-position: -100% 0;
+        }
+    }
+}
+
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    ::selection {
+        background: var(--color-brand-100);
+        color: var(--color-brand-900);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+@layer components {
+    /* ---------- Buttons ---------- */
+    .btn {
+        @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:pointer-events-none disabled:opacity-60;
+    }
+
+    .btn-lg {
+        @apply px-6 py-3;
+    }
+
+    .btn-md {
+        @apply px-4 py-2.5;
+    }
+
+    .btn-sm {
+        @apply rounded-lg px-3 py-1.5 text-[13px];
+    }
+
+    .btn-primary {
+        @apply bg-brand-600 text-white shadow-sm hover:bg-brand-500 hover:shadow-md active:bg-brand-700;
+    }
+
+    .btn-dark {
+        @apply bg-slate-900 text-white shadow-sm hover:bg-slate-700 hover:shadow-md;
+    }
+
+    .btn-secondary {
+        @apply bg-white text-slate-700 ring-1 ring-slate-200 shadow-xs hover:bg-slate-50 hover:ring-slate-300;
+    }
+
+    .btn-ghost {
+        @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+    }
+
+    .btn-danger {
+        @apply bg-white text-rose-600 ring-1 ring-rose-200 shadow-xs hover:bg-rose-50;
+    }
+
+    /* ---------- Form controls ---------- */
+    .input {
+        @apply w-full rounded-xl border-0 bg-white px-3.5 py-2.5 text-sm text-slate-900 ring-1 ring-slate-200 shadow-xs transition placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500;
+    }
+
+    .select {
+        @apply appearance-none bg-none;
+    }
+
+    .label {
+        @apply mb-1.5 block text-[13px] font-medium text-slate-700;
+    }
+
+    .help-error {
+        @apply mt-1.5 text-sm text-rose-600;
+    }
+
+    /* ---------- Cards & surfaces ---------- */
+    .card {
+        @apply rounded-2xl bg-white ring-1 ring-slate-200/80 shadow-(--shadow-card);
+    }
+
+    .card-hover {
+        @apply transition-all duration-200 hover:-translate-y-0.5 hover:ring-slate-300 hover:shadow-(--shadow-card-hover);
+    }
+
+    .badge {
+        @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide uppercase;
+    }
+
+    .chip {
+        @apply inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-sm font-medium text-slate-600 ring-1 ring-slate-200 transition hover:bg-slate-50 hover:text-slate-900 hover:ring-slate-300;
+    }
+
+    .chip-active {
+        @apply bg-brand-600 text-white ring-brand-600 hover:bg-brand-600 hover:text-white hover:ring-brand-600;
+    }
+
+    /* ---------- Section scaffolding ---------- */
+    .section-title {
+        @apply text-xl font-bold tracking-tight text-slate-900 sm:text-2xl;
+    }
+
+    .eyebrow {
+        @apply text-xs font-semibold uppercase tracking-widest text-brand-600;
+    }
+
+    @media (min-width: 1024px) {
+        .section-title {
+            @apply text-2xl;
+        }
+    }
+
+    /* ---------- Progress ---------- */
+    .progress-track {
+        @apply h-1.5 w-full overflow-hidden rounded-full bg-slate-100;
+    }
+
+    .progress-fill {
+        @apply h-full rounded-full bg-gradient-to-r from-brand-500 to-brand-600 transition-all duration-500;
+    }
+
+    /* ---------- Skeletons ---------- */
+    .skeleton {
+        @apply rounded-lg bg-slate-100 relative overflow-hidden;
+        background-image: linear-gradient(100deg, transparent 40%, rgb(255 255 255 / 0.65) 50%, transparent 60%);
+        background-size: 200% 100%;
+        animation: shimmer 1.6s linear infinite;
+    }
+
+    /* ---------- Misc ---------- */
+    .no-scrollbar {
+        scrollbar-width: none;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    .prose-lesson {
+        @apply leading-relaxed text-slate-600 whitespace-pre-line;
+    }
+}
+
+/* ---------- Floating cart ---------- */
+/* Keep page content and the footer's copyright row clear of the fixed cart bar. */
+body:has([data-cart-bar]) main {
+    padding-bottom: 6rem;
+}
+
+body:has([data-cart-bar]) footer {
+    padding-bottom: 5.5rem;
+}
+
+@media (min-width: 640px) {
+    body:has([data-cart-bar]) footer {
+        padding-bottom: 6.5rem;
+    }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

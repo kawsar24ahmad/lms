@@ -17,7 +17,8 @@
         <meta property="og:description" content="{{ $siteSettings->displayDescription() }}">
     @endif
     @if ($siteSettings->meta_image)
-        <meta property="og:image" content="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteSettings->meta_image) }}">
+        <meta property="og:image"
+            content="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($siteSettings->meta_image) }}">
     @endif
 
     @if ($siteSettings->favicon)
@@ -42,7 +43,7 @@
         @scroll.window="scrolled = window.scrollY > 12" @click.outside="showCatMenu = false; showProfile = false"
         class="sticky top-0 z-50 border-b transition-shadow duration-200"
         :class="scrolled || mobileNav ? 'border-slate-200/90 bg-white/95 shadow-(--shadow-card) backdrop-blur' : 'border-transparent bg-white'">
-        <div class="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto overflow-hidden flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6 lg:px-8">
             {{-- Brand --}}
             <button type="button"
                 class="flex size-9 shrink-0 items-center justify-center rounded-lg text-slate-600 transition hover:bg-slate-100 lg:hidden"
@@ -419,7 +420,8 @@
                     <p class="text-sm font-bold text-slate-900">Support</p>
                     <ul class="mt-4 space-y-2.5 text-sm text-slate-500">
                         <li><a href="#" class="transition hover:text-slate-900">Help center</a></li>
-                        <li><a href="{{ $siteSettings->contact_email ? 'mailto:'.$siteSettings->contact_email : '#' }}" class="transition hover:text-slate-900">Contact us</a></li>
+                        <li><a href="{{ $siteSettings->contact_email ? 'mailto:' . $siteSettings->contact_email : '#' }}"
+                                class="transition hover:text-slate-900">Contact us</a></li>
                         <li><a href="#" class="transition hover:text-slate-900">Terms & privacy</a></li>
                         <li><a href="/ui-demo" class="text-brand-600 transition hover:text-brand-700">UI kit (demo)</a>
                         </li>
@@ -430,7 +432,7 @@
             <div
                 class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-200/80 pt-6 sm:flex-row">
                 <p class="text-xs text-slate-500">
-                    {{ $siteSettings->footer_text ?: '© '.now()->year.' '.$siteSettings->displayName().'. All rights reserved.' }}
+                    {{ $siteSettings->footer_text ?: '© ' . now()->year . ' ' . $siteSettings->displayName() . '. All rights reserved.' }}
                 </p>
                 <p class="text-xs text-slate-400">Designed for learning. Built with Laravel & Livewire.</p>
             </div>

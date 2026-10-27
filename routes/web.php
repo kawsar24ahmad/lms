@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\LessonNoteController;
-use App\Http\Controllers\LessonProgressController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\LessonNoteController;
+use App\Http\Controllers\LessonProgressController;
 
 Route::livewire('/', 'pages::home.index')->name('home');
 
@@ -62,3 +63,9 @@ Route::middleware(['auth', 'throttle:120,1'])->post(
     '/lessons/{lesson}/progress',
     [LessonProgressController::class, 'update']
 )->name('lessons.progress.update');
+
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+
+    return 'Storage link created successfully!';
+});

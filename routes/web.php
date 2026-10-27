@@ -65,7 +65,28 @@ Route::middleware(['auth', 'throttle:120,1'])->post(
 )->name('lessons.progress.update');
 
 Route::get('/storage-link', function () {
-    Artisan::call('storage:link');
+    $target = realpath(storage_path('app/public'));
+    $link = public_path('storage');
 
-    return 'Storage link created successfully!';
+    if (is_link($link)) {
+        return 'Storage link already exists.';
+    }
+
+    if (file_exists($link)) {
+        return 'Storage path already exists. Check it manually.';
+    }
+
+    if (!$target || !is_dir($target)) {
+        return 'Storage target directory not found.';
+    }
+
+    if (!function_exists('symlink')) {
+        return 'PHP symlink() is disabled on this server.';
+    }
+
+    if (symlink($target, $link)) {
+        return 'Storage link created successfully.';
+    }
+
+    return 'Failed to create link. Contact hosting support.';
 });

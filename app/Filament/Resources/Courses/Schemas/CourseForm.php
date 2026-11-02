@@ -301,8 +301,9 @@ class CourseForm
                                                                 ->numeric()
                                                                 ->default(0),
                                                         ])
+                                                        ->defaultItems(0)
                                                         ->columnSpanFull()
-                                                        ->collapsed()
+
 
 
                                                 ]),

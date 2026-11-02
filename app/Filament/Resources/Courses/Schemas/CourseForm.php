@@ -302,6 +302,7 @@ class CourseForm
                                                                 ->default(0),
                                                         ])
                                                         ->columnSpanFull()
+                                                        ->collapsed()
 
 
                                                 ]),

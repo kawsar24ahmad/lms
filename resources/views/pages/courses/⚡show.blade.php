@@ -175,9 +175,9 @@ new class extends Component {
                         <div class="flex items-baseline gap-2.5">
                             <span class="text-3xl font-extrabold tracking-tight {{ ($course->isDiscounted() ? $course->effectivePrice() : $course->price) == 0 ? 'text-emerald-600' : 'text-slate-900' }}">
                                 @if ($course->isDiscounted() && $course->price > 0)
-                                    <span class="mr-1.5 align-middle text-base font-medium text-slate-400 line-through">${{ number_format($course->price, 2) }}</span>
+                                    <span class="mr-1.5 align-middle text-base font-medium text-slate-400 line-through">{{ number_format($course->price, 2) }}</span>
                                 @endif
-                                {{ ($course->isDiscounted() ? $course->effectivePrice() : $course->price) == 0 ? 'Free' : '$' . number_format($course->effectivePrice(), 2) }}
+                                {{ ($course->isDiscounted() ? $course->effectivePrice() : $course->price) == 0 ? 'Free' : '' . number_format($course->effectivePrice(), 2) }}
                             </span>
                             @if ($course->isDiscounted() && $course->price > 0 && $course->effectivePrice() > 0)
                                 @php $off = (int) round((1 - $course->effectivePrice() / $course->price) * 100); @endphp

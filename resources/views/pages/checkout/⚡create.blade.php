@@ -114,7 +114,7 @@ new class extends Component
             <h1 class="mt-5 text-xl font-extrabold text-slate-900">Order {{ $placedOrder['number'] }} placed</h1>
             <p class="mt-2 max-w-sm text-sm leading-relaxed text-slate-500">
                 Your order is awaiting payment. As soon as your payment of
-                <span class="font-semibold text-slate-900">${{ number_format($placedOrder['due'], 2) }}</span>
+                <span class="font-semibold text-slate-900">{{ number_format($placedOrder['due'], 2) }}</span>
                 is received and verified you will get full access to the courses.
             </p>
             <div class="mt-6 flex gap-2">

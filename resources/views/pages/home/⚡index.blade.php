@@ -172,23 +172,20 @@ $hero = \App\Models\HeroSection::with('featuredCourse.instructor')->first();
             </div>
 
 @php
-    $featured = $hero?->featuredCourse;
-    // যদি কোর্সের নিজস্ব image_path থাকে, অথবা যদি YouTube ভিডিওর URL থাকে
-    $hasMedia = $featured && ($featured->image_path || $featured->intro_video_url);
+$featured = $hero?->featuredCourse;
+// যদি কোর্সের নিজস্ব image_path থাকে, অথবা যদি YouTube ভিডিওর URL থাকে
+$hasMedia = $featured && ($featured->image_path || $featured->intro_video_url);
 @endphp
 
 <div class="relative rounded-2xl bg-white/95 p-4 shadow-(--shadow-pop) ring-1 ring-white/20 backdrop-blur-xl">
 
-    @if($hasMedia && $featured->image_path)
-        {{-- ১. যদি কোর্সের নিজস্ব আপলোড করা ইমেজ থাকে --}}
-        <img src="{{ asset('storage/' . $featured->image_path) }}" alt="{{ $featured->title }}"
-            class="aspect-video w-full rounded-xl object-cover" />
-    @elseif($hasMedia && $featured->intro_video_url)
+
+    @if($hasMedia && $featured->intro_video_url)
         {{-- ২. যদি ইমেজ না থাকে কিন্তু ইউটিউব ভিডিও URL থাকে (যেমন আপনার ডেটায় আছে) --}}
         @php
-            // YouTube URL থেকে Video ID বের করার ছোট্ট লজিক
-            preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $featured->intro_video_url, $match);
-            $youtubeId = $match[1] ?? null;
+    // YouTube URL থেকে Video ID বের করার ছোট্ট লজিক
+    preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $featured->intro_video_url, $match);
+    $youtubeId = $match[1] ?? null;
         @endphp
 
         @if($youtubeId)
@@ -202,6 +199,11 @@ $hero = \App\Models\HeroSection::with('featuredCourse.instructor')->first();
             <x-ui.thumb :seed="$hero?->mockup_thumb_seed ?? 'figma-masterclass'" class="aspect-video w-full rounded-xl"
                 icon="play" :label="$featured->title" />
         @endif
+
+    @elseif($hasMedia && $featured->image_path)
+        {{-- ১. যদি কোর্সের নিজস্ব আপলোড করা ইমেজ থাকে --}}
+        <img src="{{ asset('storage/' . $featured->image_path) }}" alt="{{ $featured->title }}"
+            class="aspect-video w-full rounded-xl object-cover" />
     @else
         {{-- ৩. কোনো মিডিয়া না থাকলে আপনার আগের ডিফল্ট Seed থাম্বনেইল কম্পোনেন্ট --}}
         <x-ui.thumb :seed="$hero?->mockup_thumb_seed ?? 'figma-masterclass'" class="aspect-video w-full rounded-xl"

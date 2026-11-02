@@ -69,9 +69,9 @@
                 <span class="text-lg font-extrabold tracking-tight {{ $free ? 'text-emerald-600' : 'text-slate-900' }}">
                     @if ($originalPrice !== null)
                         <span
-                            class="mr-1 align-middle text-xs font-medium text-slate-400 line-through">${{ $originalPrice }}</span>
+                            class="mr-1 align-middle text-xs font-medium text-slate-400 line-through">{{ $originalPrice }}</span>
                     @endif
-                    {{ $free ? 'Free' : '$' . number_format((float) $effective, 2) }}
+                    {{ $free ? 'Free' : '' . number_format((float) $effective, 2) }}
                 </span>
 
                 <span

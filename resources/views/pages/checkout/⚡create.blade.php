@@ -159,10 +159,10 @@ new class extends Component
 
                                     <div class="shrink-0 text-right text-sm">
                                         @if ($course->isDiscounted() && $original > 0)
-                                            <span class="mr-1 text-xs text-slate-400 line-through">${{ number_format($original, 2) }}</span>
+                                            <span class="mr-1 text-xs text-slate-400 line-through">{{ number_format($original, 2) }}</span>
                                         @endif
                                         <span class="{{ $final == 0 ? 'font-semibold text-emerald-600' : 'font-bold text-slate-900' }}">
-                                            {{ $final == 0 ? 'Free' : '$'.number_format($final, 2) }}
+                                            {{ $final == 0 ? 'Free' : ''.number_format($final, 2) }}
                                         </span>
                                     </div>
                                 </li>
@@ -180,16 +180,16 @@ new class extends Component
                     <dl class="mt-5 space-y-2.5 text-sm">
                         <div class="flex justify-between text-slate-600">
                             <dt>Original price</dt>
-                            <dd>${{ number_format($subtotal, 2) }}</dd>
+                            <dd>{{ number_format($subtotal, 2) }}</dd>
                         </div>
                         <div class="flex justify-between font-medium text-emerald-600">
                             <dt>Course discounts</dt>
-                            <dd>−${{ number_format($subtotal - $total, 2) }}</dd>
+                            <dd>−{{ number_format($subtotal - $total, 2) }}</dd>
                         </div>
                         <div class="border-t border-slate-100 pt-3">
                             <div class="flex items-baseline justify-between text-base font-extrabold text-slate-900">
                                 <dt>Total due today</dt>
-                                <dd>${{ number_format($total, 2) }}</dd>
+                                <dd>{{ number_format($total, 2) }}</dd>
                             </div>
                         </div>
                     </dl>
@@ -202,7 +202,7 @@ new class extends Component
                         x-data
                     >
                         <span wire:loading.remove wire:target="place">
-                            {{ $total > 0 ? 'Place order — $'.number_format($total, 2) : 'Enroll for free' }}
+                            {{ $total > 0 ? 'Place order — '.number_format($total, 2) : 'Enroll for free' }}
                         </span>
                         <span wire:loading wire:target="place" class="flex items-center gap-2">
                             <svg class="size-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"/><path d="M4 12a8 8 0 0 1 8-8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>

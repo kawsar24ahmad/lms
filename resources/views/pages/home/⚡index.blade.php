@@ -231,25 +231,25 @@ $hasMedia = $featured && ($featured->image_path || $featured->intro_video_url);
             </div>
         </div>
 
-        @if($hero?->mockup_next_lesson_title)
+        {{-- @if($hero?->mockup_next_lesson_title)
             <div class="mt-4 rounded-xl bg-slate-50 p-3">
                 <p class="text-[11px] font-semibold tracking-widest text-slate-400 uppercase">Up next</p>
                 <p class="mt-1 text-sm font-semibold text-slate-800">{{ $hero->mockup_next_lesson_title }} →</p>
             </div>
-        @endif
+        @endif --}}
     </div>
 </div>
 
             <div class="card absolute -bottom-8 -right-10 flex animate-fade-up items-center gap-2.5 px-3.5 py-2.5"
                 style="animation-delay: 0.15s">
                 <span class="grid size-8 place-items-center rounded-lg bg-amber-100 text-sm">🔥</span>
-                <div>
+                {{-- <div>
                     <p class="text-xs font-bold text-slate-900">{{ $hero?->streak_title ?? '12-day streak' }}</p>
                     <p class="text-[11px] text-slate-500">{{ $hero?->streak_subtitle ?? 'Keep it going!' }}</p>
-                </div>
+                </div> --}}
             </div>
 
-            <div class="card absolute right-0 bottom-14 flex animate-fade-up items-center gap-2.5 px-3.5 py-2.5"
+            {{-- <div class="card absolute right-0 bottom-14 flex animate-fade-up items-center gap-2.5 px-3.5 py-2.5"
                 style="animation-delay: 0.3s">
                 <span class="grid size-8 place-items-center rounded-lg bg-emerald-100 text-emerald-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -262,7 +262,7 @@ $hasMedia = $featured && ($featured->image_path || $featured->intro_video_url);
                     </p>
                     <p class="text-[11px] text-slate-500">{{ $hero?->badge_earned_subtitle ?? 'UX Foundations' }}</p>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

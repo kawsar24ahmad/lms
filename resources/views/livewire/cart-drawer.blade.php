@@ -112,10 +112,10 @@
                         <span class="truncate">course{{ $this->cartCount === 1 ? '' : 's' }} in cart</span>
                     </span>
                     <span class="mt-0.5 block truncate text-sm font-bold text-white">
-                        ${{ number_format($this->cartSubtotal, 2) }}
+                        {{ number_format($this->cartSubtotal, 2) }}
                         @if ($this->cartSavings > 0)
                             <span class="ml-1.5 text-[11px] font-medium text-emerald-400">Save
-                                ${{ number_format($this->cartSavings, 2) }}</span>
+                                {{ number_format($this->cartSavings, 2) }}</span>
                         @endif
                     </span>
                 </button>
@@ -225,8 +225,8 @@
                     <ul class="space-y-3">
                         @foreach ($this->cartItems as $item)
                             @php
-                                $itemEffective = $item->effectivePrice();
-                                $itemFree = $itemEffective <= 0;
+        $itemEffective = $item->effectivePrice();
+        $itemFree = $itemEffective <= 0;
                             @endphp
 
                             <li wire:key="cart-item-{{ $item->id }}"
@@ -268,11 +268,11 @@
                                     <div class="mt-1.5 flex flex-wrap items-baseline gap-1.5">
                                         <span
                                             class="text-sm font-bold {{ $itemFree ? 'text-emerald-600' : 'text-slate-900' }}">
-                                            {{ $itemFree ? 'Free' : '$' . number_format($itemEffective, 2) }}
+                                            {{ $itemFree ? 'Free' : '' . number_format($itemEffective, 2) }}
                                         </span>
                                         @if ($item->isDiscounted() && (float) $item->price > 0)
                                             <span class="text-xs font-medium text-slate-400 line-through">
-                                                ${{ number_format((float) $item->price, 2) }}
+                                                {{ number_format((float) $item->price, 2) }}
                                             </span>
                                         @endif
                                     </div>
@@ -290,7 +290,7 @@
                             <dt>Subtotal</dt>
                             <dd
                                 class="{{ $this->cartSavings > 0 ? 'text-slate-400 line-through' : 'font-medium text-slate-700' }}">
-                                ${{ number_format($this->cartOriginalTotal, 2) }}
+                                 {{ number_format($this->cartOriginalTotal, 2) }}
                             </dd>
                         </div>
 
@@ -306,7 +306,7 @@
                                     </svg>
                                     Course discounts
                                 </dt>
-                                <dd class="font-semibold">−${{ number_format($this->cartSavings, 2) }}</dd>
+                                <dd class="font-semibold">−{{ number_format($this->cartSavings, 2) }}</dd>
                             </div>
                         @endif
 
@@ -314,7 +314,7 @@
                             class="flex items-baseline justify-between border-t border-slate-100 pt-2.5 text-slate-900">
                             <dt class="text-sm font-semibold">Total</dt>
                             <dd class="text-xl font-extrabold tracking-tight">
-                                ${{ number_format($this->cartSubtotal, 2) }}
+                                 {{ number_format($this->cartSubtotal, 2) }}
                             </dd>
                         </div>
                     </dl>

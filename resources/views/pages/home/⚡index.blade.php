@@ -97,16 +97,20 @@ new class extends Component {
 $hero = \App\Models\HeroSection::with('featuredCourse.instructor')->first();
 @endphp
 
-<section class="relative overflow-hidden bg-slate-950">
+<section class="relative overflow-hidden bg-white">
     <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <!-- Soft pastel ambient blobs for a clean modern light theme -->
         <div
-            class="absolute -top-32 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-brand-600/20 blur-[110px]">
+            class="absolute -top-32 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-indigo-500/10 blur-[110px]">
         </div>
-        <div class="absolute top-24 right-[-8rem] h-80 w-80 rounded-full bg-sky-500/10 blur-[90px]"></div>
-        <svg class="absolute inset-0 size-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg">
+        <div class="absolute top-24 right-[-8rem] h-80 w-80 rounded-full bg-sky-400/15 blur-[90px]"></div>
+        <div class="absolute bottom-0 left-[-6rem] h-72 w-72 rounded-full bg-fuchsia-400/10 blur-[90px]"></div>
+
+        <!-- Subtle dark grid pattern -->
+        <svg class="absolute inset-0 size-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <pattern id="hero-grid" width="34" height="34" patternUnits="userSpaceOnUse">
-                    <path d="M34 0H0v34" fill="none" stroke="white" />
+                    <path d="M34 0H0v34" fill="none" stroke="#0f172a" />
                 </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#hero-grid)" />
@@ -117,152 +121,136 @@ $hero = \App\Models\HeroSection::with('featuredCourse.instructor')->first();
         class="relative mx-auto grid max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-8 lg:px-8 lg:py-24">
         <div class="max-w-xl">
             @if($hero?->badge_is_active && $hero?->badge_text)
-                <span class="badge bg-white/10 text-brand-200 ring-1 ring-white/15">
-                    <span class="size-1.5 rounded-full bg-{{ $hero->badge_status_color ?? 'emerald-400' }}"></span>
+                <span class="badge bg-indigo-50 text-indigo-700 ring-1 ring-indigo-500/20 font-medium">
+                    <span class="size-1.5 rounded-full bg-{{ $hero->badge_status_color ?? 'emerald-500' }}"></span>
                     {{ $hero->badge_text }}
                 </span>
             @endif
 
             <h1
-                class="mt-5 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-[3.4rem] lg:leading-[1.1]">
+                class="mt-5 text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem] lg:leading-[1.1]">
                 {{ $hero?->title_heading ?? 'Learn skills that' }}
-                <span class="bg-gradient-to-r from-brand-300 via-sky-300 to-emerald-300 bg-clip-text text-transparent">
+                <span class="bg-gradient-to-r from-indigo-600 via-fuchsia-600 to-rose-500 bg-clip-text text-transparent">
                     {{ $hero?->title_highlight ?? 'actually matter' }}
                 </span>
-                {{ $hero?->title_subheading ?? 'to your career.' }}
+                <span class="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                    {{ $hero?->title_subheading ?? 'to your career.' }}
+                </span>
             </h1>
 
-            <p class="mt-5 max-w-lg text-base leading-relaxed text-slate-300 sm:text-lg">
+            <p class="mt-5 max-w-lg text-base leading-relaxed text-slate-600 sm:text-lg">
                 {{ $hero?->description ?? 'Expert-led courses, hands-on projects and real certificates. Learn at your own pace and build a portfolio you can show off — starting today.' }}
             </p>
 
             <form action="{{ route('courses.index') }}" method="GET"
-                class="mt-8 flex max-w-md rounded-2xl bg-white/10 p-1.5 ring-1 ring-white/20 backdrop-blur transition focus-within:ring-2 focus-within:ring-brand-400 items-center">
+                class="mt-8 flex max-w-md items-center rounded-2xl bg-white p-1.5 shadow-lg shadow-slate-200/60 ring-1 ring-slate-200 transition focus-within:ring-2 focus-within:ring-indigo-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor" class="pointer-events-none mx-3.5 size-5 shrink-0 text-slate-400">
+                    stroke="currentColor" class="pointer-events-none mx-3.5 size-5 shrink-0 text-indigo-500">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
                 <input type="search" name="search" placeholder="What do you want to learn?"
-                    class="w-full bg-transparent text-sm text-white placeholder:text-slate-400 focus:outline-none" />
+                    class="w-full bg-transparent text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none" />
                 <button type="submit" class="btn btn-primary btn-md shrink-0">Search</button>
             </form>
 
-            <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-slate-300">
+            <div class="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-slate-600">
                 <span class="flex items-center gap-2">
                     <span class="flex -space-x-2">
-                        <x-ui.avatar name="Amina Yusuf" size="xs" class="ring-2 ring-slate-950" />
-                        <x-ui.avatar name="David Park" size="xs" class="ring-2 ring-slate-950" />
-                        <x-ui.avatar name="Lena Kovacs" size="xs" class="ring-2 ring-slate-950" />
+                        <x-ui.avatar name="Amina Yusuf" size="xs" class="ring-2 ring-white" />
+                        <x-ui.avatar name="David Park" size="xs" class="ring-2 ring-white" />
+                        <x-ui.avatar name="Lena Kovacs" size="xs" class="ring-2 ring-white" />
                     </span>
-                    <span><strong
-                            class="font-bold text-white">{{ $hero?->formatted_learners_count ?? '42,000+' }}</strong>
-                        {{ $hero?->learners_text ?? 'learners' }}</span>
+                    <span>
+                        <strong class="font-bold text-indigo-600">{{ $hero?->formatted_learners_count ?? '42,000+' }}</strong>
+                        {{ $hero?->learners_text ?? 'learners' }}
+                    </span>
                 </span>
-                <span>&starf; <strong
-                        class="font-bold text-white">{{ number_format($hero?->rating_score ?? 4.8, 1) }}</strong>
-                    {{ $hero?->rating_text ?? 'average course rating' }}</span>
+                <span class="flex items-center gap-1">
+                    <span class="text-amber-500 text-base">&starf;</span>
+                    <strong class="font-bold text-slate-900">{{ number_format($hero?->rating_score ?? 4.8, 1) }}</strong>
+                    {{ $hero?->rating_text ?? 'average course rating' }}
+                </span>
             </div>
         </div>
 
         {{-- Illustrative course player mockup --}}
         <div class="relative mx-auto mt-10 block w-full max-w-md sm:mt-12 lg:mt-0" aria-hidden="true">
             <div
-                class="absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-brand-500/30 via-transparent to-sky-400/20 blur-2xl">
+                class="absolute -inset-6 rounded-[2rem] bg-gradient-to-tr from-indigo-500/20 via-fuchsia-500/15 to-sky-400/20 blur-2xl">
             </div>
 
-@php
-$featured = $hero?->featuredCourse;
-// যদি কোর্সের নিজস্ব image_path থাকে, অথবা যদি YouTube ভিডিওর URL থাকে
-$hasMedia = $featured && ($featured->image_path || $featured->intro_video_url);
-@endphp
+            @php
+                $featured = $hero?->featuredCourse;
+                $hasMedia = $featured && ($featured->image_path || $featured->intro_video_url);
+            @endphp
 
-<div class="relative rounded-2xl bg-white/95 p-4 shadow-(--shadow-pop) ring-1 ring-white/20 backdrop-blur-xl">
+            <div class="relative rounded-2xl bg-white p-4 shadow-xl shadow-slate-200/80 ring-1 ring-slate-200/80">
 
+                @if($hasMedia && $featured->intro_video_url)
+                    @php
+                        preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $featured->intro_video_url, $match);
+                        $youtubeId = $match[1] ?? null;
+                    @endphp
 
-    @if($hasMedia && $featured->intro_video_url)
-        {{-- ২. যদি ইমেজ না থাকে কিন্তু ইউটিউব ভিডিও URL থাকে (যেমন আপনার ডেটায় আছে) --}}
-        @php
-    // YouTube URL থেকে Video ID বের করার ছোট্ট লজিক
-    preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $featured->intro_video_url, $match);
-    $youtubeId = $match[1] ?? null;
-        @endphp
+                    @if($youtubeId)
+                        <div x-data="{ playing: false }" class="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900">
+                            <template x-if="!playing">
+                                <button type="button" @click="playing = true" aria-label="Play video"
+                                    class="group relative block size-full cursor-pointer focus:outline-none">
+                                    <img src="https://i.ytimg.com/vi/{{ $youtubeId }}/maxresdefault.jpg"
+                                        onerror="this.src='https://i.ytimg.com/vi/{{ $youtubeId }}/hqdefault.jpg'" alt="Video thumbnail"
+                                        class="size-full object-cover transition-transform duration-300 group-hover:scale-105" />
 
-        @if($youtubeId)
-            <div class="relative aspect-video w-full overflow-hidden rounded-xl bg-slate-900">
-                <iframe src="https://www.youtube-nocookie.com/embed/{{ $youtubeId }}" class="size-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-            </div>
-        @else
-            {{-- ইউটিউব আইডি কাজ না করলে ডিফল্ট থাম্ব কম্পোনেন্ট --}}
-            <x-ui.thumb :seed="$hero?->mockup_thumb_seed ?? 'figma-masterclass'" class="aspect-video w-full rounded-xl"
-                icon="play" :label="$featured->title" />
-        @endif
+                                    <div class="absolute inset-0 bg-slate-950/25 transition-colors group-hover:bg-slate-950/35"></div>
 
-    @elseif($hasMedia && $featured->image_path)
-        {{-- ১. যদি কোর্সের নিজস্ব আপলোড করা ইমেজ থাকে --}}
-        <img src="{{ asset('storage/' . $featured->image_path) }}" alt="{{ $featured->title }}"
-            class="aspect-video w-full rounded-xl object-cover" />
-    @else
-        {{-- ৩. কোনো মিডিয়া না থাকলে আপনার আগের ডিফল্ট Seed থাম্বনেইল কম্পোনেন্ট --}}
-        <x-ui.thumb :seed="$hero?->mockup_thumb_seed ?? 'figma-masterclass'" class="aspect-video w-full rounded-xl"
-            icon="play" :label="$featured?->title ?? 'Figma Masterclass'" />
-    @endif
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <div
+                                            class="flex size-16 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-600 to-fuchsia-600 text-white shadow-xl ring-4 ring-white/40 transition-all duration-300 group-hover:scale-110">
+                                            <svg class="ml-1 size-7 fill-current" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </button>
+                            </template>
 
-    <div class="px-2 pb-1 pt-4">
-        <p class="flex items-center justify-between text-sm">
-            <span class="font-bold text-slate-900">{{ $featured?->title ?? 'Design Systems Masterclass' }}</span>
-            <span class="text-xs font-semibold text-amber-500">★
-                {{ number_format($featured?->rating ?? 4.9, 1) }}</span>
-        </p>
-        <div class="mt-2 flex items-center gap-2">
-            <x-ui.avatar :name="$featured?->instructor?->name ?? 'Mina Talha'" size="xs" />
-            <span class="text-xs text-slate-500">{{ $featured?->instructor?->name ?? 'Mina Talha' }} ·
-                {{ $featured?->instructor?->headline ?? 'Lead Product Designer' }}</span>
-        </div>
+                            <template x-if="playing">
+                                <iframe src="https://www.youtube-nocookie.com/embed/{{ $youtubeId }}?autoplay=1&rel=0"
+                                    class="size-full border-0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </template>
+                        </div>
+                    @else
+                        <x-ui.thumb :seed="$hero?->mockup_thumb_seed ?? 'figma-masterclass'" class="aspect-video w-full rounded-xl"
+                            icon="play" :label="$featured->title" />
+                    @endif
 
-        <div class="mt-4">
-            <div class="mb-1.5 flex justify-between text-[11px] font-medium text-slate-500">
-                <span>Course progress</span><span>64%</span>
-            </div>
-            <div class="progress-track h-2">
-                <div class="progress-fill" style="width: 64%"></div>
-            </div>
-        </div>
+                @elseif($hasMedia && $featured->image_path)
+                    <img src="{{ asset('storage/' . $featured->image_path) }}" alt="{{ $featured->title }}"
+                        class="aspect-video w-full rounded-xl object-cover" />
+                @else
+                    <x-ui.thumb :seed="$hero?->mockup_thumb_seed ?? 'figma-masterclass'" class="aspect-video w-full rounded-xl"
+                        icon="play" :label="$featured?->title ?? 'Figma Masterclass'" />
+                @endif
 
-        {{-- @if($hero?->mockup_next_lesson_title)
-            <div class="mt-4 rounded-xl bg-slate-50 p-3">
-                <p class="text-[11px] font-semibold tracking-widest text-slate-400 uppercase">Up next</p>
-                <p class="mt-1 text-sm font-semibold text-slate-800">{{ $hero->mockup_next_lesson_title }} →</p>
-            </div>
-        @endif --}}
-    </div>
-</div>
-
-            <div class="card absolute -bottom-8 -right-10 flex animate-fade-up items-center gap-2.5 px-3.5 py-2.5"
-                style="animation-delay: 0.15s">
-                <span class="grid size-8 place-items-center rounded-lg bg-amber-100 text-sm">🔥</span>
-                {{-- <div>
-                    <p class="text-xs font-bold text-slate-900">{{ $hero?->streak_title ?? '12-day streak' }}</p>
-                    <p class="text-[11px] text-slate-500">{{ $hero?->streak_subtitle ?? 'Keep it going!' }}</p>
-                </div> --}}
-            </div>
-
-            {{-- <div class="card absolute right-0 bottom-14 flex animate-fade-up items-center gap-2.5 px-3.5 py-2.5"
-                style="animation-delay: 0.3s">
-                <span class="grid size-8 place-items-center rounded-lg bg-emerald-100 text-emerald-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" class="size-4">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg>
-                </span>
-                <div>
-                    <p class="text-xs font-bold text-slate-900">{{ $hero?->badge_earned_title ?? 'Certificate earned' }}
+                <div class="px-2 pb-1 pt-4">
+                    <p class="flex items-center justify-between text-sm">
+                        <span class="font-bold text-slate-900">{{ $featured?->title ?? 'Design Systems Masterclass' }}</span>
+                        <span class="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-600 ring-1 ring-amber-500/20">
+                            ★ {{ number_format($featured?->rating ?? 4.9, 1) }}
+                        </span>
                     </p>
-                    <p class="text-[11px] text-slate-500">{{ $hero?->badge_earned_subtitle ?? 'UX Foundations' }}</p>
+                    <div class="mt-2 flex items-center gap-2">
+                        <x-ui.avatar :name="$featured?->instructor?->name ?? 'Mina Talha'" size="xs" />
+                        <span class="text-xs text-slate-500">
+                            <span class="font-medium text-slate-700">{{ $featured?->instructor?->name ?? 'Mina Talha' }}</span> ·
+                            {{ $featured?->instructor?->headline ?? 'Lead Product Designer' }}
+                        </span>
+                    </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </div>
 </section>

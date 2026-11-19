@@ -4,7 +4,7 @@
 # /public/css/filament
 # /public/fonts-manifest.dev.json
 # /public/fonts/filament
-# /public/hot
+/public/hot
 # /public/js/filament
 # /public/storage
 /storage/*.key
